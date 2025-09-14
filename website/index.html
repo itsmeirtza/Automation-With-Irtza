@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation With Irtza - Advanced Automation Framework</title>
+    <meta name="description" content="Professional automation framework with AI-powered video processing and intelligent workflow management by Irtza Ali Waris">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="cube-wrapper">
+                <div class="cube">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+            </div>
+            <h2>Welcome to Automation With Irtza!</h2>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-3d">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <span class="logo-text">Automation With Irtza</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#features" class="nav-link">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#dashboard" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <a href="javascript:void(0)" class="btn btn-primary nav-cta" id="nav-get-started" onclick="goToWorkflow()">
+                <i class="fas fa-rocket"></i>
+                Get Started
+            </a>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="text-gradient">Automation With Irtza</span><br>
+                        Next-Gen Video Automation Framework
+                    </h1>
+                    <p class="hero-description">
+                        Transform your workflow with AI-powered automation. From intelligent video processing 
+                        to seamless task orchestration, experience the future of productivity.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" id="get-started-btn" onclick="goToWorkflow()">
+                            <i class="fas fa-rocket"></i>
+                            Get Started
+                        </button>
+                        <button class="btn btn-secondary" id="demo-btn" onclick="goToDashboard()">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features</h2>
+                <p class="section-subtitle">
+                    Discover the cutting-edge capabilities that make Automation With Irtza the ultimate video automation solution
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">AI-Powered Processing</h3>
+                    <p class="feature-description">
+                        Advanced machine learning algorithms for intelligent task automation and content processing
+                    </p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="feature-title">Video Automation</h3>
+                    <p class="feature-description">
+                        Transform long-form videos into engaging short clips with automatic scene detection and processing
+                    </p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="feature-title">Workflow Engine</h3>
+                    <p class="feature-description">
+                        Flexible task orchestration system with custom workflows and advanced scheduling capabilities
+                    </p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Real-time Dashboard</h3>
+                    <p class="feature-description">
+                        Comprehensive monitoring and control with live analytics and performance tracking
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section id="workflow-section" class="workflow">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Video Automation Workflow</h2>
+                <p class="section-subtitle">
+                    Step-by-step process to automate your video content creation
+                </p>
+            </div>
+            <div class="workflow-card">
+                <div class="workflow-steps">
+                    <div class="step-progress">
+                        <div class="step active" id="step-1">
+                            <div class="step-number">1</div>
+                            <div class="step-title">YouTube Channel</div>
+                        </div>
+                        <div class="step" id="step-2">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Video URL</div>
+                        </div>
+                        <div class="step" id="step-3">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Processing</div>
+                        </div>
+                        <div class="step" id="step-4">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Complete</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-content active" id="content-1">
+                        <h3>Step 1: Enter YouTube Channel</h3>
+                        <div class="form-group">
+                            <label>YouTube Channel URL</label>
+                            <input type="url" id="youtube-channel" placeholder="https://www.youtube.com/channel/your-channel-id" required>
+                        </div>
+                        <button class="btn btn-primary" onclick="setChannelAndNext()">Continue</button>
+                    </div>
+                    
+                    <div class="step-content" id="content-2">
+                        <h3>Step 2: Enter Video URL</h3>
+                        <div class="form-group">
+                            <label>Video URL to Process</label>
+                            <input type="url" id="video-url" placeholder="https://www.youtube.com/watch?v=your-video-id" required>
+                        </div>
+                        <button class="btn btn-primary" onclick="startProcessing()">Start Processing</button>
+                        <button class="btn btn-secondary" onclick="nextStep(1)">Back</button>
+                    </div>
+                    
+                    <div class="step-content" id="content-3">
+                        <h3>Step 3: Processing Video</h3>
+                        <div class="processing-status">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-bar"></div>
+                            </div>
+                            <p id="status-text">Analyzing video content...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-content" id="content-4">
+                        <h3>Step 4: Process Complete!</h3>
+                        <div class="success-message">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Your video has been processed successfully!</p>
+                            <div id="clips-summary"></div>
+                            <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button class="btn btn-primary" onclick="uploadSelectedClips()">
+                                    <i class="fas fa-upload"></i>
+                                    Upload Selected to YouTube
+                                </button>
+                                <button class="btn btn-secondary" onclick="goToDashboard()">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    View Dashboard
+                                </button>
+                                <button class="btn btn-secondary" onclick="resetWorkflow()">
+                                    <i class="fas fa-redo"></i>
+                                    Process Another Video
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Live Control Dashboard <span class="live-indicator">● Live</span></h2>
+                <p class="section-subtitle">
+                    Real-time monitoring and control of your automation workflows
+                </p>
+            </div>
+            
+            <!-- YouTube Channel Info -->
+            <div class="channel-info" id="channel-info" style="display: none;">
+                <div class="channel-header">
+                    <div class="channel-avatar">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="channel-details">
+                        <h3 id="channel-name">YouTube Channel</h3>
+                        <p id="channel-url">No channel connected</p>
+                    </div>
+                    <div class="channel-stats">
+                        <div class="mini-stat">
+                            <div class="mini-number" id="channel-videos">0</div>
+                            <div class="mini-label">Videos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-mockup">
+                <div class="dashboard-sidebar">
+                    <div class="sidebar-header">
+                        <div class="user-profile">
+                            <div class="avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Admin User</div>
+                                <div class="user-role">System Administrator</div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="javascript:void(0)" class="nav-item active">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-item" onclick="startAutomation()">
+                            <i class="fas fa-tasks"></i>
+                            <span>Start Workflow</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-item" onclick="startAutomation()">
+                            <i class="fas fa-video"></i>
+                            <span>Video Processing</span>
+                        </a>
+                        <a href="#contact" class="nav-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact</span>
+                        </a>
+                    </nav>
+                </div>
+                <div class="dashboard-main">
+                    <div class="dashboard-header">
+                        <h3>System Overview</h3>
+                        <div class="header-actions">
+                            <button class="btn btn-sm btn-primary" onclick="startAutomation()">
+                                <i class="fas fa-plus"></i>
+                                New Workflow
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <div class="card-title">Active Tasks</div>
+                                <div class="card-value" id="dashboard-active-tasks">0</div>
+                            </div>
+                            <div class="card-chart">
+                                <div class="mini-chart">
+                                    <div class="chart-bar" style="height: 20%"></div>
+                                    <div class="chart-bar" style="height: 40%"></div>
+                                    <div class="chart-bar" style="height: 60%"></div>
+                                    <div class="chart-bar" style="height: 80%"></div>
+                                    <div class="chart-bar" style="height: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <div class="card-title">Clips Processed</div>
+                                <div class="card-value" id="dashboard-clips-processed">0</div>
+                            </div>
+                            <div class="card-trend">
+                                <i class="fas fa-video"></i>
+                                <span>This session</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-activity">
+                        <h4>Recent Activity</h4>
+                        <div class="activity-list" id="dashboard-activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">System ready for automation tasks</div>
+                                    <div class="activity-time">Just now</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Latest Shorts from YouTube -->
+                    <div class="recent-activity" id="youtube-latest">
+                        <h4>Latest Shorts</h4>
+                        <div class="activity-list" id="youtube-latest-videos">
+                            <!-- Filled dynamically with latest videos from the connected channel -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">
+                    Ready to transform your workflow? Contact Irtza to learn more about Automation With Irtza
+                </p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:Irtzaaliwaris@gmail.com" class="contact-inline-link">Irtzaaliwaris@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>GitHub</h4>
+                            <p><a href="https://github.com/ialiwaris" target="_blank" rel="noopener" class="contact-inline-link">@ialiwaris</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Instagram</h4>
+                            <p><a href="https://instagram.com/iali_waris" target="_blank" rel="noopener" class="contact-inline-link">@iali_waris</a></p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required>
+                        <label for="name">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="company" name="company">
+                        <label for="company">Company (Optional)</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" required></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-3d">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <span class="logo-text">Automation With Irtza</span>
+                    </div>
+                    <p>Next-generation video automation framework by Irtza Ali Waris</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#home">Automation With Irtza</a></li>
+                        <li><a href="#workflow-section">Video Automation</a></li>
+                        <li><a href="#features">Features</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="/terms">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Automation With Irtza by Irtza Ali Waris. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Global variables
+        let currentWorkflowStep = 1;
+        let isProcessing = false;
+        let connectedChannel = null;
+        let dashboardUpdateInterval = null;
+        let activityUpdateInterval = null;
+        let youtubeUpdateInterval = null;
+        
+        // Navigation functions for the automation workflow
+        function goToWorkflow() {
+            document.querySelector('#workflow-section').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        function startAutomation() {
+            document.querySelector('#workflow-section').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        function goToDashboard() {
+            document.querySelector('#dashboard').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            loadDashboardData();
+            startLiveUpdates();
+        }
+        
+        function closeWorkflow() {
+            document.getElementById('workflow-modal').style.display = 'none';
+        }
+        
+        function closeDashboard() {
+            document.getElementById('dashboard-modal').style.display = 'none';
+            stopLiveUpdates();
+        }
+        
+        function nextStep(step) {
+            // Hide all step contents
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.step').forEach(stepEl => {
+                stepEl.classList.remove('active');
+            });
+            
+            // Show current step
+            document.getElementById(`content-${step}`).classList.add('active');
+            document.getElementById(`step-${step}`).classList.add('active');
+            currentWorkflowStep = step;
+        }
+        
+        async function startProcessing() {
+            const youtubeChannel = document.getElementById('youtube-channel').value;
+            const videoUrl = document.getElementById('video-url').value;
+            
+            if (!youtubeChannel || !videoUrl) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Persist to backend state
+            try {
+                await fetch('/api/set_youtube_channel', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ channel_url: youtubeChannel })
+                });
+            } catch (e) { /* ignore */ }
+            
+            const setVideoResp = await fetch('/api/set_video_url', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ video_url: videoUrl })
+            });
+            const setVideoJson = await setVideoResp.json().catch(() => ({}));
+            if (!setVideoResp.ok || !setVideoJson.success) {
+                alert(setVideoJson.message || 'Could not set video URL');
+                return;
+            }
+            
+            nextStep(3);
+            isProcessing = true;
+            updateDashboardStats();
+            
+            // Kick off processing on backend
+            const resp = await fetch('/api/process_video', { method: 'POST' });
+            if (!resp.ok) {
+                alert('Failed to start processing');
+                isProcessing = false;
+                return;
+            }
+            
+            // Poll status and update progress
+            const progressBar = document.getElementById('progress-bar');
+            const statusText = document.getElementById('status-text');
+            const statuses = {
+                'idle': 'Waiting to start...',
+                'processing': 'AI video processing in progress...',
+                'completed': 'Processing complete',
+                'error': 'Processing failed'
+            };
+            
+            const poll = setInterval(async () => {
+                try {
+                    const s = await fetch('/api/processing_status');
+                    const data = await s.json();
+                    progressBar.style.width = (data.progress || 0) + '%';
+                    statusText.textContent = statuses[data.status] || 'Processing...';
+                    
+                    if (data.status === 'completed' || data.status === 'error') {
+                        clearInterval(poll);
+                        isProcessing = false;
+                        if (data.status === 'completed') {
+                            await showClipsSummary();
+                            nextStep(4);
+                        } else {
+                            alert('Processing failed: ' + (data.error_message || 'Unknown error'));
+                        }
+                        updateDashboardStats();
+                    }
+                } catch (e) {
+                    console.error('Status poll failed', e);
+                }
+            }, 2000);
+        }
+        
+        async function showClipsSummary() {
+            try {
+                const res = await fetch('/api/get_clips');
+                const data = await res.json();
+                const clips = data.clips || [];
+                renderClipsList(clips);
+            } catch (e) {
+                console.error('Failed to load clips', e);
+            }
+        }
+        
+        function resetWorkflow() {
+            currentWorkflowStep = 1;
+            document.getElementById('youtube-channel').value = '';
+            document.getElementById('video-url').value = '';
+            document.getElementById('progress-bar').style.width = '0%';
+            nextStep(1);
+        }
+        
+        function openDashboard() {
+            closeWorkflow();
+            goToDashboard();
+        }
+        
+        function loadDashboardData() {
+            // Update dashboard with real-time data
+            updateDashboardStats();
+            loadRecentActivity();
+            updateChannelInfo();
+        }
+        
+        function updateDashboardStats() {
+            // Update both dashboard locations
+            const activeTasks = isProcessing ? '1' : '0';
+            const clipsProcessed = currentWorkflowStep >= 4 ? '6' : '0';
+            
+            // Update control dashboard
+            const dashboardActive = document.getElementById('dashboard-active-tasks');
+            const dashboardClips = document.getElementById('dashboard-clips-processed');
+            
+            if (dashboardActive) dashboardActive.textContent = activeTasks;
+            if (dashboardClips) dashboardClips.textContent = clipsProcessed;
+            
+            // Update any other dashboard instances
+            const activeTasksEl = document.getElementById('active-tasks');
+            const clipsProcessedEl = document.getElementById('clips-processed');
+            
+            if (activeTasksEl) activeTasksEl.textContent = activeTasks;
+            if (clipsProcessedEl) clipsProcessedEl.textContent = clipsProcessed;
+        }
+        
+        function loadRecentActivity() {
+            const activityList = document.getElementById('activity-list');
+            const now = new Date();
+            const activities = [];
+            
+            if (connectedChannel) {
+                activities.push({
+                    icon: 'fa-youtube',
+                    text: `Connected to ${connectedChannel.name}`,
+                    time: getTimeAgo(now - 30000)
+                });
+            }
+            
+            if (currentWorkflowStep >= 4) {
+                activities.push({
+                    icon: 'fa-check-circle',
+                    text: 'Video processing completed successfully',
+                    time: getTimeAgo(now - 120000)
+                });
+                activities.push({
+                    icon: 'fa-upload',
+                    text: '6 clips processed and ready for upload',
+                    time: getTimeAgo(now - 300000)
+                });
+            }
+            
+            if (isProcessing) {
+                activities.push({
+                    icon: 'fa-cogs',
+                    text: 'AI video processing in progress...',
+                    time: 'Now'
+                });
+            }
+            
+            activities.push({
+                icon: 'fa-info-circle',
+                text: 'System ready for automation tasks',
+                time: getTimeAgo(now - 600000)
+            });
+            
+            const activityHTML = activities.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas ${activity.icon}"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.text}</div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            activityList.innerHTML = activityHTML;
+            
+            // Also update dashboard activity list if exists
+            const dashboardActivityList = document.getElementById('dashboard-activity-list');
+            if (dashboardActivityList) {
+                dashboardActivityList.innerHTML = activityHTML;
+            }
+        }
+        
+        function extractChannelName(url) {
+            // Extract channel name from URL or return a default
+            if (url.includes('channel/')) {
+                const channelId = url.split('channel/')[1].split('/')[0];
+                return `Channel ${channelId.substring(0, 8)}`;
+            } else if (url.includes('@')) {
+                const handle = url.split('@')[1].split('/')[0];
+                return `@${handle}`;
+            }
+            return 'YouTube Channel';
+        }
+        
+        function getTimeAgo(timestamp) {
+            const seconds = Math.floor((Date.now() - timestamp) / 1000);
+            
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + ' min ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + ' hr ago';
+            return Math.floor(seconds / 86400) + ' days ago';
+        }
+        
+        function refreshDashboard() {
+            updateDashboardStats();
+            loadRecentActivity();
+            updateChannelInfo();
+            
+            // Show refresh animation
+            const refreshBtn = event.target;
+            refreshBtn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Refreshing...';
+            setTimeout(() => {
+                refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Data';
+            }, 1000);
+        }
+        
+        function updateChannelInfo() {
+            const channelInfo = document.getElementById('channel-info');
+            if (connectedChannel) {
+                channelInfo.style.display = 'block';
+                const name = connectedChannel.name || 'YouTube Channel';
+                document.getElementById('channel-name').textContent = name;
+                document.getElementById('channel-url').textContent = connectedChannel.url;
+                if (connectedChannel.videos !== null && connectedChannel.videos !== undefined) {
+                    document.getElementById('channel-videos').textContent = connectedChannel.videos;
+                }
+                // Update sidebar user area as channel identity
+                const sidebarName = document.querySelector('.user-name');
+                if (sidebarName) sidebarName.textContent = name;
+                const sidebarRole = document.querySelector('.user-role');
+                if (sidebarRole) sidebarRole.style.display = 'none';
+
+                // Kick off live data fetch
+                refreshYouTubeData();
+            } else {
+                channelInfo.style.display = 'none';
+            }
+        }
+
+        // Called when user completes Step 1
+        function setChannelAndNext() {
+            const youtubeChannel = document.getElementById('youtube-channel').value;
+            if (youtubeChannel) {
+                connectedChannel = {
+                    url: youtubeChannel,
+                    name: extractChannelName(youtubeChannel),
+                    videos: null
+                };
+                updateChannelInfo();
+            }
+            nextStep(2);
+        }
+
+        async function refreshYouTubeData() {
+            if (!connectedChannel || !connectedChannel.url) return;
+            try {
+                const infoRes = await fetch(`/api/youtube/channel_info?channel_url=${encodeURIComponent(connectedChannel.url)}`);
+                if (infoRes.ok) {
+                    const info = await infoRes.json();
+                    if (info && info.success) {
+                        if (info.title) {
+                            connectedChannel.name = info.title;
+                            const nameEl = document.getElementById('channel-name');
+                            if (nameEl) nameEl.textContent = info.title;
+                            const sidebarName = document.querySelector('.user-name');
+                            if (sidebarName) sidebarName.textContent = info.title;
+                        }
+                        if (info.statistics && info.statistics.videoCount !== undefined) {
+                            const videosEl = document.getElementById('channel-videos');
+                            if (videosEl) videosEl.textContent = info.statistics.videoCount;
+                        }
+                    }
+                }
+
+                const vidsRes = await fetch(`/api/youtube/latest_videos?channel_url=${encodeURIComponent(connectedChannel.url)}`);
+                if (vidsRes.ok) {
+                    const data = await vidsRes.json();
+                    if (data && data.success) {
+                        renderLatestVideos(data.videos || []);
+                    }
+                }
+            } catch (err) {
+                console.error('YouTube live data error:', err);
+            }
+        }
+
+        function renderLatestVideos(videos) {
+            const container = document.getElementById('youtube-latest-videos');
+            if (!container) return;
+            if (!videos || videos.length === 0) {
+                container.innerHTML = '<div class="activity-item"><div class="activity-content"><div class="activity-title">No recent videos found</div></div></div>';
+                return;
+            }
+            const html = videos.map(v => `
+                <a class="activity-item" href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">
+                    <div class="activity-icon"><img src="${v.thumbnail}" alt="" style="width:36px;height:36px;border-radius:6px;object-fit:cover;"></div>
+                    <div class="activity-content">
+                        <div class="activity-title">${v.title}</div>
+                        <div class="activity-time">${getTimeAgo(new Date(v.publishedAt).getTime())}${v.durationSeconds ? ' • ' + Math.round(v.durationSeconds) + 's' : ''}</div>
+                    </div>
+                </a>
+            `).join('');
+            container.innerHTML = html;
+        }
+        
+        function startLiveUpdates() {
+            // Update dashboard every 5 seconds
+            dashboardUpdateInterval = setInterval(() => {
+                updateDashboardStats();
+                loadRecentActivity();
+            }, 5000);
+            
+            // Poll YouTube data every 30 seconds when a channel is connected
+            youtubeUpdateInterval = setInterval(() => {
+                if (connectedChannel) {
+                    refreshYouTubeData();
+                }
+            }, 30000);
+            
+            // Add random activity every 10 seconds
+            activityUpdateInterval = setInterval(() => {
+                if (Math.random() > 0.7) { // 30% chance
+                    addRandomActivity();
+                }
+            }, 10000);
+        }
+        
+        function stopLiveUpdates() {
+            if (dashboardUpdateInterval) {
+                clearInterval(dashboardUpdateInterval);
+                dashboardUpdateInterval = null;
+            }
+            if (activityUpdateInterval) {
+                clearInterval(activityUpdateInterval);
+                activityUpdateInterval = null;
+            }
+            if (youtubeUpdateInterval) {
+                clearInterval(youtubeUpdateInterval);
+                youtubeUpdateInterval = null;
+            }
+        }
+        
+        function addRandomActivity() {
+            const activities = [
+                'System health check completed',
+                'Cache optimized for better performance',
+                'New automation framework update available',
+                'Database backup completed successfully'
+            ];
+            
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            loadRecentActivity(); // Refresh activity list
+        }
+        
+        function renderClipsList(clips) {
+            const summary = document.getElementById('clips-summary');
+            if (!summary) return;
+            if (!clips.length) {
+                summary.innerHTML = '<p>No clips were created.</p>';
+                return;
+            }
+            const rows = clips.map((c, i) => `
+                <label style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #eee;">
+                    <input type="checkbox" class="clip-check" value="${i}" checked />
+                    <span style="font-weight:600;">Clip ${i+1}</span>
+                    <span style="color:#6b7280;">${c.duration ? Number(c.duration).toFixed(1)+'s' : ''}</span>
+                    <span style="color:#6b7280;">${c.file_path ? c.file_path.split('/').pop() : ''}</span>
+                </label>
+            `).join('');
+            summary.innerHTML = `
+                <div style="margin-top: 10px;">
+                    <p><strong>✅ ${clips.length} clips created successfully</strong></p>
+                    <div id="clips-list">${rows}</div>
+                </div>
+            `;
+        }
+        
+        async function uploadSelectedClips() {
+            const checks = Array.from(document.querySelectorAll('.clip-check:checked'));
+            if (checks.length === 0) {
+                alert('Select at least one clip to upload');
+                return;
+            }
+            const selected = checks.map(c => parseInt(c.value));
+            try {
+                const res = await fetch('/api/upload_to_youtube', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ selected_clips: selected })
+                });
+                const data = await res.json();
+                if (!data.success) {
+                    alert(data.message || 'Failed to start upload');
+                    return;
+                }
+                // Poll upload status
+                const summary = document.getElementById('clips-summary');
+                summary.insertAdjacentHTML('beforeend', '<p id="upload-status">Uploading to YouTube...</p>');
+                const poll = setInterval(async () => {
+                    const s = await fetch('/api/upload_status');
+                    const st = await s.json();
+                    if (st.status === 'upload_completed' || st.status === 'upload_error') {
+                        clearInterval(poll);
+                        const results = st.results || {};
+                        const items = Object.keys(results).map(k => {
+                            const r = results[k];
+                            if (r.success) {
+                                return `<li>Clip ${parseInt(k)+1}: <a target="_blank" href="${r.url}">${r.youtube_id}</a></li>`;
+                            } else {
+                                return `<li>Clip ${parseInt(k)+1}: Failed - ${r.error || 'Unknown error'}</li>`;
+                            }
+                        }).join('');
+                        document.getElementById('upload-status').outerHTML = `<div><p><strong>Upload results</strong></p><ul>${items}</ul></div>`;
+                    }
+                }, 3000);
+            } catch (e) {
+                alert('Upload failed to start: ' + e.message);
+            }
+        }
+        
+        // Contact form handling
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                message: document.getElementById('message').value
+            };
+            
+            try {
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(result.message);
+                    this.reset();
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                alert('An error occurred. Please try again later.');
+                console.error('Contact form error:', error);
+            }
+        });
+        
+        // Demo system for the tools section
+        let demoActive = false;
+        const demoSteps = [
+            'Analyzing video content...',
+            'AI scene detection...',
+            'Creating clips...',
+            'Uploading to YouTube...'
+        ];
+        
+        document.getElementById('play-demo').addEventListener('click', function() {
+            if (!demoActive) {
+                startDemo();
+            }
+        });
+        
+        document.getElementById('pause-demo').addEventListener('click', function() {
+            if (demoActive) {
+                pauseDemo();
+            }
+        });
+        
+        function startDemo() {
+            demoActive = true;
+            const steps = document.querySelectorAll('.process-step');
+            let currentStep = 0;
+            
+            const demoInterval = setInterval(() => {
+                // Remove active class from all steps
+                steps.forEach(step => step.classList.remove('active'));
+                
+                // Add active class to current step
+                if (currentStep < steps.length) {
+                    steps[currentStep].classList.add('active');
+                    currentStep++;
+                } else {
+                    // Reset demo
+                    currentStep = 0;
+                    steps[0].classList.add('active');
+                }
+            }, 2000);
+            
+            // Store interval for pausing
+            window.demoInterval = demoInterval;
+        }
+        
+        function pauseDemo() {
+            demoActive = false;
+            if (window.demoInterval) {
+                clearInterval(window.demoInterval);
+            }
+        }
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

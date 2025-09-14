@@ -1,0 +1,39 @@
+{
+    "app_name": "Automation With Irtza",
+    "version": "1.0.0",
+    "author": "Irtza Ali Waris",
+    "email": "Irtzaaliwaris@gmail.com",
+    "website": "https://ialiwaris.com",
+    "log_level": "INFO",
+    "default_workflow": ["clip_uploader"],
+    "task_settings": {
+        "hello_world": {
+            "enabled": true
+        },
+        "system_check": {
+            "enabled": true,
+            "check_disk_space": true,
+            "check_memory": true
+        },
+        "cleanup": {
+            "enabled": true,
+            "cleanup_logs": true,
+            "cleanup_temp_files": true
+        },
+        "clip_uploader": {
+            "enabled": true,
+            "video_url": "",
+            "dry_run": false,
+            "max_clips": 6,
+            "whisper_model": "tiny",
+            "scene_threshold": 0.4,
+            "client_id": "34536726114-fkiahglk2fpkj0g4q2l450kmu6i1uovh.apps.googleusercontent.com",
+            "project_id": "automation-with-irtza"
+        }
+    },
+    "automation_settings": {
+        "max_retries": 3,
+        "retry_delay": 5,
+        "timeout": 300
+    }
+}
