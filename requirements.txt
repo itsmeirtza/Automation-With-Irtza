@@ -1,2 +1,12 @@
-# Minimal requirements for Vercel test deployment
+# Working requirements for Vercel deployment
 Flask>=2.0.0
+Werkzeug>=2.0.0
+Jinja2>=3.0.0
+
+# YouTube API (lightweight)
+google-api-python-client>=2.0.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+
+# Basic utilities
+requests>=2.25.0

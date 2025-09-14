@@ -12,12 +12,24 @@
   ],
   "routes": [
     {
-      "src": "/(css|js|images)/(.*)",
-      "dest": "/website/$1/$2"
+      "src": "/css/(.*)",
+      "dest": "/website/css/$1"
     },
     {
-      "src": "/website/(.*)",
-      "dest": "/website/$1"
+      "src": "/js/(.*)",
+      "dest": "/website/js/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/website/images/$1"
+    },
+    {
+      "src": "/test",
+      "dest": "/api/test.py"
+    },
+    {
+      "src": "/health",
+      "dest": "/api/test.py"
     },
     {
       "src": "/(.*)",
