@@ -582,6 +582,11 @@ def api_youtube_latest_videos():
     videos.sort(key=lambda v: (not v['isShort'], v.get('publishedAt','')), reverse=False)
     return jsonify({'success': True, 'videos': videos})
 
+# Vercel handler - this is what Vercel will call
+def handler(event, context):
+    """Serverless function handler for Vercel"""
+    return app
+
 if __name__ == '__main__':
     logger.info("Starting Automation With Irtza web application...")
     logger.info("Created by: Irtza Ali Waris")
