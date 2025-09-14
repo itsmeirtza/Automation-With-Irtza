@@ -1,20 +1,2 @@
-# Lightweight requirements for Vercel deployment
-# Heavy packages (whisper, scikit-learn) removed for faster deployment
-
-# Web application dependencies
-Flask>=2.3.0
-Werkzeug>=2.3.0
-Jinja2>=3.1.0
-
-# Google API dependencies
-google-api-python-client>=2.0.0
-google-auth-oauthlib>=1.0.0
-google-auth-httplib2>=0.1.0
-
-# Basic utilities
-requests>=2.25.0
-
-# Note: Heavy packages for local development:
-# openai-whisper>=20231117
-# scikit-learn>=1.3.0
-# pytest>=7.0.0
+# Minimal requirements for Vercel test deployment
+Flask>=2.0.0
