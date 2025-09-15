@@ -26,10 +26,21 @@ workflow_state = {
 
 # Mock video data for testing
 mock_videos = [
-    {'id': 'dQw4w9WgXcQ', 'title': 'Amazing Tutorial Video', 'duration': 300, 'views': '1.2M'},
-    {'id': 'kJQP7kiw5Fk', 'title': 'How to Build Apps', 'duration': 450, 'views': '890K'},
-    {'id': 'fJ9rUzIMcZQ', 'title': 'Programming Tips', 'duration': 600, 'views': '2.1M'}
+    {'id': 'QPO6PfTdYrI', 'title': 'itsmeirtza Channel Content', 'duration': 300, 'views': '1.2K'},
+    {'id': 'dQw4w9WgXcQ', 'title': 'Amazing Tutorial Video', 'duration': 450, 'views': '890K'},
+    {'id': 'kJQP7kiw5Fk', 'title': 'How to Build Apps', 'duration': 600, 'views': '2.1M'}
 ]
+
+# Channel data
+channel_data = {
+    '@itsmeirtza': {
+        'id': 'UCitsmeirtza123',
+        'name': 'itsmeirtza',
+        'subscribers': '1.2K',
+        'videos': 25,
+        'description': 'Tech content creator and automation specialist'
+    }
+}
 
 @app.route('/')
 def index():
@@ -217,14 +228,15 @@ def process_video():
             {'step': 'Finalizing...', 'progress': 100}
         ]
         
-        # Generate mock clips with AI metadata
+        # Generate mock clips with AI metadata based on your video
+        # Video ID: QPO6PfTdYrI from @itsmeirtza
         mock_transcripts = [
-            "Learn advanced automation techniques for modern development workflows",
-            "Discover powerful tips and tricks for efficient coding practices",
-            "Master the art of building scalable applications with best practices",
-            "Explore cutting-edge tools for streamlining your development process",
-            "Understanding core concepts of software architecture and design",
-            "Implementing robust testing strategies for production-ready code"
+            "Welcome to itsmeirtza channel where we explore amazing tech content and automation",
+            "Learn the latest programming techniques and development best practices with irtza",
+            "Discover powerful automation tools that will streamline your workflow process",
+            "Master advanced coding concepts and build scalable applications efficiently",
+            "Explore cutting-edge technologies and innovative solutions for developers",
+            "Implement robust testing strategies and deployment techniques for production"
         ]
         
         clips = []
@@ -360,7 +372,35 @@ def reset_workflow():
         'error_message': '',
         'upload_results': {}
     }
-    return jsonify({'success': True, 'message': 'Workflow reset successfully'})
+        return jsonify({'success': True, 'message': 'Workflow reset successfully'})
+
+@app.route('/api/channel_info')
+def get_channel_info():
+    """Get channel information"""
+    try:
+        channel_url = request.args.get('channel', '')
+        if '@itsmeirtza' in channel_url or 'itsmeirtza' in channel_url:
+            return jsonify({
+                'success': True,
+                'channel': channel_data['@itsmeirtza'],
+                'recent_videos': [
+                    {
+                        'id': 'QPO6PfTdYrI',
+                        'title': 'Latest Video from itsmeirtza',
+                        'views': '1.2K',
+                        'duration': '5:30',
+                        'upload_date': '2 days ago'
+                    }
+                ]
+            })
+        else:
+            return jsonify({
+                'success': True,
+                'channel': {'name': 'Channel', 'subscribers': 'N/A'},
+                'recent_videos': []
+            })
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
 @app.route('/api/preview_clip/<int:clip_id>')
 def preview_clip(clip_id):
