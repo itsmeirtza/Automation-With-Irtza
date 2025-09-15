@@ -2,34 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.py",
+      "src": "api/minimal.py",
       "use": "@vercel/python"
-    },
-    {
-      "src": "website/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/css/(.*)",
-      "dest": "/website/css/$1"
-    },
-    {
-      "src": "/js/(.*)",
-      "dest": "/website/js/$1"
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/website/images/$1"
-    },
-    {
-      "src": "/website/(.*)",
-      "dest": "/website/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/api/index.py"
+      "dest": "/api/minimal.py"
     }
   ]
 }
