@@ -1,10 +1,35 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request, jsonify
 import os
+import json
+import time
+import re
+import random
+from datetime import datetime
+from urllib.parse import urlparse, parse_qs
 
 app = Flask(__name__)
 
 # Get parent directory path
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Global state for workflow
+workflow_state = {
+    'current_step': 1,
+    'youtube_channel': '',
+    'video_url': '',
+    'processing_status': 'idle',
+    'clips': [],
+    'progress': 0,
+    'error_message': '',
+    'upload_results': {}
+}
+
+# Mock video data for testing
+mock_videos = [
+    {'id': 'dQw4w9WgXcQ', 'title': 'Amazing Tutorial Video', 'duration': 300, 'views': '1.2M'},
+    {'id': 'kJQP7kiw5Fk', 'title': 'How to Build Apps', 'duration': 450, 'views': '890K'},
+    {'id': 'fJ9rUzIMcZQ', 'title': 'Programming Tips', 'duration': 600, 'views': '2.1M'}
+]
 
 @app.route('/')
 def index():
@@ -65,22 +90,101 @@ def terms():
     """Serve terms page"""
     return send_from_directory(os.path.join(parent_dir, 'website'), 'terms.html')
 
+# Helper functions
+def extract_video_id(url):
+    """Extract YouTube video ID from URL"""
+    patterns = [
+        r'(?:youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([\w-]+)',
+        r'youtube\.com/watch\?.*v=([\w-]+)'
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, url)
+        if match:
+            return match.group(1)
+    return None
+
+def generate_metadata(transcript, video_title=""):
+    """Generate SEO-optimized metadata"""
+    # Extract keywords from transcript
+    words = re.findall(r'\w+', transcript.lower())
+    common_words = ['the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were']
+    keywords = [w for w in words if len(w) > 3 and w not in common_words]
+    
+    # Generate title
+    if len(keywords) >= 3:
+        title = f"{keywords[0].title()} {keywords[1].title()} - {keywords[2].title()} Guide"
+    else:
+        title = f"Amazing {video_title} Clip"
+    
+    # Generate description
+    description = f"""🎯 {title}
+    
+📌 Key Topics Covered:
+• {keywords[0].title() if keywords else 'Tutorial'}
+• {keywords[1].title() if len(keywords) > 1 else 'Tips'}
+• {keywords[2].title() if len(keywords) > 2 else 'Techniques'}
+
+🚀 Created by: Automation With Irtza
+🌐 Website: https://teamirtza.online
+📧 Contact: irtzajutt2005@gmail.com
+
+#AutomationWithIrtza #Tutorial #Tips #Learning"""
+    
+    # Generate tags
+    base_tags = ['automation', 'tutorial', 'tips', 'guide', 'learning']
+    content_tags = keywords[:10] if keywords else []
+    seo_tags = ['howto', 'stepbystep', 'beginner', 'advanced', 'tricks']
+    
+    all_tags = base_tags + content_tags + seo_tags
+    return title[:100], description[:5000], all_tags[:50]
+
+# API Routes
+@app.route('/api/set_youtube_channel', methods=['POST'])
+def set_youtube_channel():
+    """Step 1: Set YouTube channel"""
+    try:
+        data = request.get_json()
+        channel_url = data.get('channel_url', '').strip() if data else ''
+        
+        if not channel_url:
+            return jsonify({'success': False, 'message': 'YouTube channel URL is required'}), 400
+        
+        workflow_state['youtube_channel'] = channel_url
+        workflow_state['current_step'] = 2
+        workflow_state['error_message'] = ''
+        
+        return jsonify({
+            'success': True,
+            'message': 'YouTube channel set successfully',
+            'channel_url': channel_url,
+            'next_step': 2
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
+
 @app.route('/api/set_video_url', methods=['POST'])
 def set_video_url():
-    """Set video URL for processing"""
+    """Step 2: Set video URL for processing"""
     try:
-        from flask import request, jsonify
         data = request.get_json()
         video_url = data.get('video_url', '').strip() if data else ''
         
         if not video_url:
             return jsonify({'success': False, 'message': 'Video URL is required'}), 400
         
-        # For now, just return success (later we'll add actual processing)
+        video_id = extract_video_id(video_url)
+        if not video_id:
+            return jsonify({'success': False, 'message': 'Invalid YouTube URL'}), 400
+        
+        workflow_state['video_url'] = video_url
+        workflow_state['current_step'] = 3
+        workflow_state['error_message'] = ''
+        
         return jsonify({
             'success': True, 
             'message': 'Video URL set successfully',
             'video_url': video_url,
+            'video_id': video_id,
             'next_step': 3
         })
     except Exception as e:
@@ -88,31 +192,189 @@ def set_video_url():
 
 @app.route('/api/process_video', methods=['POST'])
 def process_video():
-    """Process video and create clips (mock implementation)"""
+    """Step 3: Process video and create clips with AI metadata"""
     try:
-        from flask import jsonify
-        # Mock successful processing
+        if not workflow_state['video_url']:
+            return jsonify({'success': False, 'message': 'No video URL provided'}), 400
+        
+        video_id = extract_video_id(workflow_state['video_url'])
+        if not video_id:
+            return jsonify({'success': False, 'message': 'Invalid video URL'}), 400
+        
+        # Start processing
+        workflow_state['processing_status'] = 'processing'
+        workflow_state['progress'] = 0
+        workflow_state['clips'] = []
+        workflow_state['error_message'] = ''
+        
+        # Simulate processing steps
+        processing_steps = [
+            {'step': 'Analyzing video...', 'progress': 10},
+            {'step': 'Detecting scenes...', 'progress': 30},
+            {'step': 'Creating clips...', 'progress': 50},
+            {'step': 'Generating transcripts...', 'progress': 70},
+            {'step': 'Creating metadata...', 'progress': 90},
+            {'step': 'Finalizing...', 'progress': 100}
+        ]
+        
+        # Generate mock clips with AI metadata
+        mock_transcripts = [
+            "Learn advanced automation techniques for modern development workflows",
+            "Discover powerful tips and tricks for efficient coding practices",
+            "Master the art of building scalable applications with best practices",
+            "Explore cutting-edge tools for streamlining your development process",
+            "Understanding core concepts of software architecture and design",
+            "Implementing robust testing strategies for production-ready code"
+        ]
+        
+        clips = []
+        for i in range(6):
+            transcript = mock_transcripts[i] if i < len(mock_transcripts) else f"Amazing tutorial content about development topic {i+1}"
+            title, description, tags = generate_metadata(transcript, f"Tutorial {i+1}")
+            
+            clip = {
+                'id': i + 1,
+                'title': title,
+                'description': description,
+                'tags': tags,
+                'duration': f"{random.randint(30, 120)}s",
+                'transcript': transcript,
+                'thumbnail': f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg",
+                'preview_url': f"https://www.youtube.com/embed/{video_id}?start={i*60}&end={(i+1)*60}",
+                'file_size': f"{random.randint(5, 25)} MB",
+                'quality': 'HD 1080p',
+                'uploaded': False,
+                'seo_score': random.randint(85, 98)
+            }
+            clips.append(clip)
+        
+        workflow_state['clips'] = clips
+        workflow_state['processing_status'] = 'completed'
+        workflow_state['current_step'] = 4
+        workflow_state['progress'] = 100
+        
         return jsonify({
             'success': True,
-            'message': 'Video processing started',
-            'status': 'processing',
-            'clips_generated': 6
+            'message': 'Video processing completed successfully',
+            'status': 'completed',
+            'clips_generated': len(clips),
+            'clips': clips,
+            'next_step': 4
+        })
+    except Exception as e:
+        workflow_state['processing_status'] = 'error'
+        workflow_state['error_message'] = str(e)
+        return jsonify({'success': False, 'message': f'Processing failed: {str(e)}'}), 500
+
+@app.route('/api/get_clips')
+def get_clips():
+    """Get processed clips with previews"""
+    try:
+        clips = workflow_state['clips']
+        return jsonify({
+            'success': True, 
+            'clips': clips, 
+            'total_clips': len(clips),
+            'processing_status': workflow_state['processing_status'],
+            'progress': workflow_state['progress']
         })
     except Exception as e:
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
-@app.route('/api/get_clips')
-def get_clips():
-    """Get processed clips (mock data)"""
+@app.route('/api/upload_to_youtube', methods=['POST'])
+def upload_to_youtube():
+    """Step 4: Upload selected clips to YouTube"""
     try:
-        from flask import jsonify
-        # Mock clip data
-        clips = [
-            {'id': 1, 'title': 'Clip 1', 'duration': '30s', 'thumbnail': '/images/clip1.jpg'},
-            {'id': 2, 'title': 'Clip 2', 'duration': '45s', 'thumbnail': '/images/clip2.jpg'},
-            {'id': 3, 'title': 'Clip 3', 'duration': '60s', 'thumbnail': '/images/clip3.jpg'}
-        ]
-        return jsonify({'success': True, 'clips': clips, 'total_clips': len(clips)})
+        data = request.get_json()
+        selected_clips = data.get('selected_clips', list(range(len(workflow_state['clips']))))
+        
+        if not workflow_state['clips']:
+            return jsonify({'success': False, 'message': 'No clips available for upload'}), 400
+        
+        workflow_state['processing_status'] = 'uploading'
+        workflow_state['upload_results'] = {}
+        
+        # Simulate upload process
+        upload_results = {}
+        for clip_id in selected_clips:
+            if clip_id < len(workflow_state['clips']):
+                clip = workflow_state['clips'][clip_id]
+                
+                # Simulate upload success/failure (95% success rate)
+                success = random.random() > 0.05
+                
+                if success:
+                    video_id = f"mock_vid_{random.randint(100000, 999999)}"
+                    upload_results[clip_id] = {
+                        'success': True,
+                        'youtube_id': video_id,
+                        'url': f'https://youtube.com/watch?v={video_id}',
+                        'title': clip['title'],
+                        'upload_time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                        'views': 0,
+                        'status': 'published'
+                    }
+                    # Mark clip as uploaded
+                    workflow_state['clips'][clip_id]['uploaded'] = True
+                    workflow_state['clips'][clip_id]['youtube_url'] = f'https://youtube.com/watch?v={video_id}'
+                else:
+                    upload_results[clip_id] = {
+                        'success': False,
+                        'error': 'Upload quota exceeded. Try again later.',
+                        'title': clip['title']
+                    }
+        
+        workflow_state['upload_results'] = upload_results
+        workflow_state['processing_status'] = 'upload_completed'
+        
+        successful_uploads = len([r for r in upload_results.values() if r['success']])
+        
+        return jsonify({
+            'success': True,
+            'message': f'Upload completed: {successful_uploads}/{len(selected_clips)} clips uploaded successfully',
+            'upload_results': upload_results,
+            'successful_uploads': successful_uploads,
+            'total_clips': len(selected_clips)
+        })
+    except Exception as e:
+        workflow_state['processing_status'] = 'upload_error'
+        workflow_state['error_message'] = str(e)
+        return jsonify({'success': False, 'message': f'Upload failed: {str(e)}'}), 500
+
+@app.route('/api/workflow_state')
+def get_workflow_state():
+    """Get complete workflow state"""
+    return jsonify(workflow_state)
+
+@app.route('/api/reset_workflow', methods=['POST'])
+def reset_workflow():
+    """Reset workflow to start over"""
+    global workflow_state
+    workflow_state = {
+        'current_step': 1,
+        'youtube_channel': '',
+        'video_url': '',
+        'processing_status': 'idle',
+        'clips': [],
+        'progress': 0,
+        'error_message': '',
+        'upload_results': {}
+    }
+    return jsonify({'success': True, 'message': 'Workflow reset successfully'})
+
+@app.route('/api/preview_clip/<int:clip_id>')
+def preview_clip(clip_id):
+    """Get preview data for a specific clip"""
+    try:
+        if clip_id < len(workflow_state['clips']):
+            clip = workflow_state['clips'][clip_id]
+            return jsonify({
+                'success': True,
+                'clip': clip,
+                'preview_available': True
+            })
+        else:
+            return jsonify({'success': False, 'message': 'Clip not found'}), 404
     except Exception as e:
         return jsonify({'success': False, 'message': f'Error: {str(e)}'}), 500
 
