@@ -400,5 +400,92 @@ def health():
     """Health check"""
     return {'status': 'healthy', 'service': 'automation-with-irtza', 'version': '1.0.0'}
 
+@app.route('/api/test')
+def api_test():
+    """Test API endpoint"""
+    return jsonify({
+        'status': 'working',
+        'message': 'API is working perfectly!',
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'workflow_state': workflow_state,
+        'available_endpoints': [
+            '/api/set_youtube_channel',
+            '/api/set_video_url', 
+            '/api/process_video',
+            '/api/get_clips',
+            '/api/upload_to_youtube'
+        ]
+    })
+
+@app.route('/debug')
+def debug_page():
+    """Debug page to check system status"""
+    return f'''<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug - Automation With Irtza</title>
+    <style>
+        body {{ font-family: monospace; background: #1a1a1a; color: #00ff88; padding: 20px; }}
+        .status {{ background: #2a2a2a; padding: 15px; margin: 10px 0; border-radius: 5px; }}
+        .working {{ border-left: 4px solid #00ff88; }}
+        pre {{ background: #0a0a0a; padding: 15px; border-radius: 5px; overflow-x: auto; }}
+        .btn {{ background: #00ff88; color: #1a1a1a; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }}
+    </style>
+</head>
+<body>
+    <h1>🔧 Automation With Irtza - Debug Panel</h1>
+    
+    <div class="status working">
+        <h3>✅ System Status: ONLINE</h3>
+        <p>Flask App: Working</p>
+        <p>Current Time: {datetime.now()}</p>
+        <p>Workflow Step: {workflow_state['current_step']}</p>
+    </div>
+    
+    <div class="status working">
+        <h3>📊 Current Workflow State:</h3>
+        <pre>{json.dumps(workflow_state, indent=2)}</pre>
+    </div>
+    
+    <div class="status working">
+        <h3>🧪 Quick Tests:</h3>
+        <button class="btn" onclick="testAPI()">Test API</button>
+        <button class="btn" onclick="testWorkflow()">Test Workflow</button>
+        <button class="btn" onclick="resetWorkflow()">Reset</button>
+        <div id="test-results" style="margin-top: 20px;"></div>
+    </div>
+    
+    <script>
+        async function testAPI() {{
+            const response = await fetch('/api/test');
+            const data = await response.json();
+            document.getElementById('test-results').innerHTML = 
+                '<pre style="color: #00ff88;">API Test Result:\n' + JSON.stringify(data, null, 2) + '</pre>';
+        }}
+        
+        async function testWorkflow() {{
+            const response = await fetch('/api/set_video_url', {{
+                method: 'POST',
+                headers: {{'Content-Type': 'application/json'}},
+                body: JSON.stringify({{'video_url': 'https://youtube.com/watch?v=test123'}})
+            }});
+            const data = await response.json();
+            document.getElementById('test-results').innerHTML = 
+                '<pre style="color: #ffaa00;">Workflow Test Result:\n' + JSON.stringify(data, null, 2) + '</pre>';
+        }}
+        
+        async function resetWorkflow() {{
+            const response = await fetch('/api/reset_workflow', {{
+                method: 'POST'
+            }});
+            const data = await response.json();
+            document.getElementById('test-results').innerHTML = 
+                '<pre style="color: #ff4400;">Reset Result:\n' + JSON.stringify(data, null, 2) + '</pre>';
+            setTimeout(() => location.reload(), 1000);
+        }}
+    </script>
+</body>
+</html>'''
+
 # For Vercel
 application = app
